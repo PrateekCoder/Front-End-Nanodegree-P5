@@ -5,7 +5,7 @@ This project mainly deals with the API's. It helped me understand the concept of
 http://prateekcoder.github.io/Front-End-Nanodegree-P5-NeighborHood-Map/
 
 ##API's USED:
-I would love to work in Berkly,CA and I am fond of Restraunts, So I made this project on different Restraunts one can find in Berkly. I have used two API's here:
+I would love to work in Berkly,CA and I am a health freak guy, So I made this project on different Gyms one can find in Berkly. I have used two API's here:
  1. Google Street View API
  2. Yelp review API
 
