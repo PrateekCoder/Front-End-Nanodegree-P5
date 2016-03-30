@@ -26,13 +26,13 @@ var ViewModel = function () {
     self.initMarkers = function () {
         var request = {
             location: self.latlong,
-            radius: '500',
-            types: ['restaurant']
+            radius: '1000',
+            types: ['gym']
         };
         service.nearbySearch(request, self.searchCallback);
     };
 
-    //Adds markers to map and keeps track of all existing locations 
+    //Adds markers to map and keeps track of all existing locations
     self.searchCallback = function (results, status) {
         var marker;
         var location;
@@ -154,7 +154,7 @@ var ViewModel = function () {
             self.openWindow.close();
         }
 
-        //clears all markers from the map 
+        //clears all markers from the map
         for (var i = 0; i < self.filteredLocations().length; i++) {
             self.filteredLocations()[i].marker.setMap(null);
         }
