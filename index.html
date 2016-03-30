@@ -1,81 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Map</title>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
+    <head>
+        <title>Map Project</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"  href="css/style.css">
+        <link rel="stylesheet"  href="css/bootstrap.min.css">
+        <script>
+            function googleError() {
+                alert("Google Maps API failed to load");
+            }
+        </script>
+        <script src="js/app.js"></script>
+        
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initialize" onerror="googleError()" async defer></script>
 
-    <div class="flex-body">
-      <div class="loading">
-        <div class="loading-text">
-          <p>Neighborhood Map is loading...</p>
-        </div>
-      </div>
-      <div class="menu">
-        <div class="filter-div">
-          <div class="filter-input">
-            <input class="filter-text" data-bind="textInput: filter" placeholder="Type to filter the list">
-          </div>
-        </div>
-        <div class="filter-marker">
-          <div class="result-marker">
-            <ul data-bind="foreach: filteredMarkerArray">
-              <li class="result-li">
-                <div class="flex-result-li">
-                  <div class="result-text" data-bind="text: marker().title, click: $parent.highlightMarker"></div>
-                  <input type="checkbox" class="result-checkbox" data-bind="checked: checkbox"/>
+    </head>
+    <body>
+        <div class ="container-fluid" >
+            <div id= "heading" class = "row">
+                <h2>Restaurants in Berkeley, CA</h2>
+                <div class="hamburger">
+                    <div class = "line"></div>
+                    <div class = "line"></div>
+                    <div class = "line"></div>
                 </div>
-              </li>
-            </ul>
-          </div>
+                <form id="search">
+                    <input placeholder="Search…" type="search" data-bind="textInput: query, event: {keyup: changeMarkers}" autocomplete="off">
+                </form>
+                
+            </div>
+            <div class = "row">
+                <nav>
+                    <div class="col-sm-4 col-md-3 list_container">
+                        <ul class = "col-md-12 list"  data-bind="foreach: filteredLocations">
+                            <li class = "list-element">
+                                <a class="location" href ="#" data-bind = "text: name, click: $parent.centerMap"></a>               
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class =" col-sm-8 col-md-9" id="map_container">
+                    <div id="map"></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="map-panel">
-        <div class="topbar">
-          <div class="topbar-title-box">
-            <h2 class="topbar-title">Favorite places in my neighborhood</h2>
-          </div>
-          <div class="topbar-menu-toggle">
-            <div class="topbar-menu-toggle-icon" data-bind="text: icon, click: toggleMenu"></div>
-          </div>
-        </div>
-        <div id="map"></div>
-      </div>
-    </div>
+        <script src="lib/oauth-signature.min.js"></script>
+        <script src="lib/knockout.js"></script>
+        <script src="lib/jquery.min.js"></script> 
+        <script src="js/menu.js"></script>
 
-    <!-- load libraries -->
-    <script src="js/lib/knockout-3.3.0.js"></script>
-    <script src="js/lib/jquery-1.11.3.min.js"></script>
-    <script src="js/lib/jquery.jsonp-2.4.0.min.js"></script>
-    <!-- oauth -->
-    <script src="https://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
-    <!-- sha1 -->
-    <script src="https://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
-
-    <!-- load code -->
-    <script src="js/model/model.js"></script>
-    <script src="js/view/view.js"></script>
-    <script src="js/viewmodel/viewmodel.js"></script>
-
-    <!-- loading/error message code -->
-    <script>
-      // Getting the loading text
-      var loadingText = document.getElementsByClassName('loading-text')[0];
-      if(loadingText) {
-        setTimeout(function() {
-          loadingText.innerHTML = "Google Map is taking a long time to respond. Please check your connection and/or reload the page.";
-        }, 3000);
-      }
-    </script>
-
-    <!-- call google map -->
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9V681P6SnJXI-5glxGhYipuRb9QiDtHM&libraries=places&callback=appInit"></script>
-    </script>
-
-</body>
+    </body>
 </html>
