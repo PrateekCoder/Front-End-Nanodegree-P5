@@ -1,5 +1,7 @@
 # Neighborhood-Map Project
-This project mainly deals with the API's. It helped me understand the concept of API's, How we can utilize big data's from big company by just using API's.
+This project mainly deals with two things:
+ 1. API's. I leanred how to utilize the big data's of companies in my project using API's. I used Google Street View API and yelp API. I also worked with Foursquare API and Instagram API.
+ 2. AJAX. This project also helpwd me get into the details of Asyncronous JavaScript.
 
 ##Link to the Working Project.
 http://prateekcoder.github.io/Front-End-Nanodegree-P5-NeighborHood-Map/
