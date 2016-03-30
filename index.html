@@ -2,34 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Your Moving Companion</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Map</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-    <form id="form-container" class="form-container">
-        <label for="street">Street: </label><input type="text" id="street" value="">
-        <label for="city">City: </label><input type="text" id="city" value="">
-        <button id="submit-btn">Submit</button>
-    </form>
-
-    <hr>
-
-    <h2 id="greeting" class="greeting">Where do you want to live?</h2>
-
-
-    <div class="wikipedia-container">
-        <h3 id="wikipedia-header">Relevant Wikipedia Links</h3>
-        <ul id="wikipedia-links">Type in an address above and find relevant Wikipedia articles here!</ul>
+    <div class="flex-body">
+      <div class="loading">
+        <div class="loading-text">
+          <p>Neighborhood Map is loading...</p>
+        </div>
+      </div>
+      <div class="menu">
+        <div class="filter-div">
+          <div class="filter-input">
+            <input class="filter-text" data-bind="textInput: filter" placeholder="Type to filter the list">
+          </div>
+        </div>
+        <div class="filter-marker">
+          <div class="result-marker">
+            <ul data-bind="foreach: filteredMarkerArray">
+              <li class="result-li">
+                <div class="flex-result-li">
+                  <div class="result-text" data-bind="text: marker().title, click: $parent.highlightMarker"></div>
+                  <input type="checkbox" class="result-checkbox" data-bind="checked: checkbox"/>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="map-panel">
+        <div class="topbar">
+          <div class="topbar-title-box">
+            <h2 class="topbar-title">Favorite places in my neighborhood</h2>
+          </div>
+          <div class="topbar-menu-toggle">
+            <div class="topbar-menu-toggle-icon" data-bind="text: icon, click: toggleMenu"></div>
+          </div>
+        </div>
+        <div id="map"></div>
+      </div>
     </div>
 
+    <!-- load libraries -->
+    <script src="js/lib/knockout-3.3.0.js"></script>
+    <script src="js/lib/jquery-1.11.3.min.js"></script>
+    <script src="js/lib/jquery.jsonp-2.4.0.min.js"></script>
+    <!-- oauth -->
+    <script src="https://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+    <!-- sha1 -->
+    <script src="https://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 
-    <div class="nytimes-container">
-        <h3 id="nytimes-header">New York Times Articles</h3>
-        <ul id="nytimes-articles" class="article-list">What's going on in your new city? Enter an address and hit submit and the NY Times will tell you here!</ul>
-    </div>
+    <!-- load code -->
+    <script src="js/model/model.js"></script>
+    <script src="js/view/view.js"></script>
+    <script src="js/viewmodel/viewmodel.js"></script>
 
-    <script src="js/libs/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <!-- loading/error message code -->
+    <script>
+      // Getting the loading text
+      var loadingText = document.getElementsByClassName('loading-text')[0];
+      if(loadingText) {
+        setTimeout(function() {
+          loadingText.innerHTML = "Google Map is taking a long time to respond. Please check your connection and/or reload the page.";
+        }, 3000);
+      }
+    </script>
+
+    <!-- call google map -->
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9V681P6SnJXI-5glxGhYipuRb9QiDtHM&libraries=places&callback=appInit"></script>
+    </script>
+
 </body>
 </html>
