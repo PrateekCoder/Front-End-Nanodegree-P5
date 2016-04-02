@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      html, body, #map-canvas { height: 100%; width: 100%; margin: 0; padding: 0;}
+    </style>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,700,300,400' rel='stylesheet' type='text/css'>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">-->
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiVoNw54-8R0okGj5Zc9BZzsn98No-efU">
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas">
+      <!-- ko foreach: articleList --><li><a data-bind="attr: {href: url}, text: content"></a></li>
+    </div>
+    <div class="search" data-bind="click: expandSearch">
+      <input type="search" name="Search" class="input" id="input" placeholder="Search for Places to visit in New Delhi" data-bind="css: {'expand': !listDisplayed()}, preventBubble: 'click', value: query, valueUpdate: 'keyup'" autocomplete="off">
+    </div>
+    <div class="trails" data-bind="css: {'expand': !listDisplayed()}">
+      <ul id="list" class="trail_list" data-bind="foreach: placeList">
+        <li data-bind="text: name, css:{'in':1}, click: $root.clickMarker"></li>
+      </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/lib/knockout-3.2.0.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
+</html>
